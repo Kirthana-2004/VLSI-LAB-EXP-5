@@ -9,6 +9,7 @@ Vivado 2023.1.
 Spartan6 FPGA
 
 **PROCEDURE: **
+
 Open Vivado: Launch Xilinx Vivado software on your computer.
 
 Create a New Project: Click on "Create Project" from the welcome page or navigate through "File" > "Project" > "New".
