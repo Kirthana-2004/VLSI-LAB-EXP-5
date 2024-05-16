@@ -1,17 +1,81 @@
-module FSM_moore(clk, rst, x, z);
-input clk, rst, x;
-output z;
-reg [2:1] present_state, NEXT_STATE; 
-parameter S0=2'b00, S1=2'b01, S2=2'b10, S3=2'b11;
-// define the next state combinational circuit
-always@(x,present_state)
-case(present_state)
+module fsm_moore( clk, rst, inp, outp);
+
+input clk, rst, inp;
+
+output outp;
+
+reg [1:0] state;
+
+reg outp;
+
+always @(posedge clk, posedge rst)
+
+begin
+
+if(rst)
+
+state<=2'b00;
+
+else
+
+begin
+
+case(state)
+
+2'b00:
+
+begin
+
+if(inp) state <=2'b01;
+
+
+
+else state <=2'b10;
+end
+
+2'b01:
+
+begin
+
+if (inp) state <=2'b11;
+else state<=2'b10;
+end
+
+2'b10:
+begin
+if (inp) state<=2'b01;
+else state <=2'b11;
+end
+
+2'b11:
+
+begin
+
+if (inp) state <=2'b01;
+else state <=2'b10;
+
+end
 
 endcase
-//define the sequential block
-always@(negedge rst, posedge clk)
 
+end
 
+end
 
-assign z=(present_state==S3); // define output
+always @(posedge clk, posedge rst)
+
+begin
+
+if(rst)
+
+outp <= 0;
+
+else if(state == 2'b11)
+
+outp <= 1;
+
+else outp<= 0;
+
+end
+
 endmodule
